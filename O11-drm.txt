@@ -1,0 +1,28 @@
+PTV O11-drm 加密视频推流工具 docker 版本
+wechatofficial · 3 月前 · 4866 次阅读
+
+O11 介绍：
+一款可以推拉流被 drm 加密的 mpd 媒体流服务器，docker 基于 ubuntu 构建，因为 alphine 轻量化镜像不能正常运行 O11。
+
+因原系统文件未开源，且不支持 ARM 架构，本容器仅允许运行在 X86 架构主机和服务器上。
+
+众所周知 github 上发布的 o11 系统有提取 /etc/passwd 文件漏洞，经过 docker 封装后，始作俑者将提取不到任何有效的敏感信息。
+
+使用方法：
+
+docker run -itd --name=o11 --restart=always -p 自定义端口:1234 wechatofficial/o11:latest
+访问：http://ip:port
+
+日志查看：
+
+docker logs -f o11
+安全加固请参考：https://blog.csdn.net/yeqinghanwu/article/details/125979997
+
+iptables -I INPUT -s 35.203.210.16 -j DROP  
+
+iptables -A OUTPUT -d 35.203.210.16 -j DROP
+声明：本容器仅用于学习交流测试使用，请严格遵守当地法律法规，合理使用本容器。严禁用于违法项目，因此产生的法律纠纷与本容器无关。
+
+预告：后续会陆续制作 xtreamUI flussonic 等 IPTV 系统镜像。
+
+https://pixman.io/topics/28
